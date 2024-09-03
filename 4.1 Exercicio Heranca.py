@@ -9,7 +9,7 @@ class Endereco:
         self.complemento = complemento
         self.cep = cep
         self.cidade = cidade
-
+        
     def __str__ (self) -> str:
         return f"\nLogradouro: {self.logradouro} \nNúmero: {self.numero} \nComplemento: {self.complemento} \nCep: {self.cep} \nCidade: {self.cidade}"
 
@@ -22,37 +22,38 @@ class Funcionario(ABC):
         self.email = email
         self.endereco = endereco
         self.salario = salario
-
+    def __str__(self) -> str:
+        return f"===== Informações do Funcionário ===== \nNome: {self.nome} \nTelefone: {self.telefone} \nEMAIL: {self.email}\n \n==== Endereço ==== \n{self.endereco} \nSalario: {self.salario}"
+    
     @abstractmethod
-    def calcular_salario(self) -> float:
+    def salarioFinal() -> float:
         pass
-
 class Engenheiro(Funcionario): 
     def __init__(self, nome: str, telefone: str, email: str, salario: float, endereco: Endereco) -> None:
         super().__init__(nome, telefone, email, salario, endereco)
         
-    def calcular_salario(self) -> float:
-        # Acréscimo de 20%
-        BONIFICACAO = 1.20
-        salario_final = self.salario * BONIFICACAO
-        return salario_final
+    def salarioFinal() -> float:
+        pass
 
 class Medico(Funcionario):
-    def __init__(self, nome: str, idade: int, salario: float, cnh: str, endereco: Endereco) -> None:
-        super().__init__(nome, idade, salario)
-        self.cnh = cnh
+    def __init__(self, nome: str, telefone: str, email: str, salario: float, endereco: Endereco) -> None:
+        super().__init__(nome, telefone, email, salario, endereco)
     
-    def calcular_salario(self) -> float:
-        # Acréscimo de 10%
-        BONIFICACAO = 1.10
-        salario_final = self.salario * BONIFICACAO
-        return salario_final
-        
+    def salarioFinal() -> float:
+        pass
+    
+    
+engenheiro = Engenheiro("Maumau", "(71) 9 8754 5784", "maumau123@gamil.com", 2500.00,
+                         Endereco ("Rua a", 412, "ao lado do mercado", "46554-450", "Salvador"))
+medico = Medico("Marcos", "(71) 9 8857 2538", "marcos123@gamil.com", 3800.00, 
+                Endereco ("Rua b", 235, "Avenida Thomas Purbano Pinto", "50235-020", "Salvador"))
+
 
 # Instanciar classes.
 #funcionario = Funcionario("José", 23, 2500)
-engenheiro = Engenheiro()
-medico = Medico()
+print(engenheiro)
+print("\n \n")
+print(medico)
 
 
         
